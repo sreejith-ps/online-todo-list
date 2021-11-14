@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TODO App</title>
+<title>TODO App - List Page</title>
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -23,20 +24,17 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
-	<div>
+	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<a href="/" class="navbar-brand">TODO Application</a>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/todoList">Todos</a></li>
+					<li><a href="/todoAdd">add</a></li>
+					<li><a href="/">Logout</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-
-	<h2>${errorMsg}</h2>
-	<form method="post">
-		<input type="text" name="username" placeholder="User name" /> <br>
-		<br> <input type="password" name="password"
-			placeholder="Password" /> <br>
-		<br>
-		<button>Login</button>
-	</form>
 </body>
 </html>

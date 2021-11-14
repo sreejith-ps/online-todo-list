@@ -25,13 +25,13 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/login")
-	public String loginPage() {
+
+	@GetMapping("/logout")
+	public String logout() {
 		return "login";
 	}
 	
-	
-	@PostMapping("/login")
+	@PostMapping("/")
 	public String login(ModelMap model, @RequestParam ("username") String username, 
 			@RequestParam("password") String password) {
 		User user = userService.validateUser(username, password);
