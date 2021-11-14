@@ -31,32 +31,32 @@ public class TodoController {
 
 	@GetMapping
 	public List<Todo> getTodos() {
-		return TodoService.getAllTodos();
+		return service.getAllTodos();
 	}
 
 	@PostMapping
 	public Todo createTodo(@RequestBody Todo Todo) {
-		return TodoService.create(Todo);
+		return service.create(Todo);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo, @RequestParam("id") Long id) 
 			throws ResourceNotFoundException {
-		Todo modifiedTodo = TodoService.update(todo, id);
+		Todo modifiedTodo = service.update(todo, id);
 		return ResponseEntity.ok(modifiedTodo);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<HttpStatus> deleteTodo(@RequestParam("id") Long id) 
 			throws ResourceNotFoundException {
-		TodoService.delete(id);
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping("/status/{id}")
 	public ResponseEntity<Todo> updateStatus(@RequestBody Todo todo, @RequestParam("id") Long id) 
 			throws ResourceNotFoundException {
-		Todo modifiedTodo = TodoService.update(todo, id);
+		Todo modifiedTodo = service.update(todo, id);
 		return ResponseEntity.ok(modifiedTodo);
 	}
 
