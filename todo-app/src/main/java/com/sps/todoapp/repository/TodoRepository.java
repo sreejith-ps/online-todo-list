@@ -1,4 +1,4 @@
-package com.sps.todoapp;
+package com.sps.todoapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

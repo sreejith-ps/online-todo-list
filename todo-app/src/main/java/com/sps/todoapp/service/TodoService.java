@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sps.todoapp.TodoRepository;
 import com.sps.todoapp.model.Todo;
+import com.sps.todoapp.repository.TodoRepository;
 
 @Service
 public class TodoService {

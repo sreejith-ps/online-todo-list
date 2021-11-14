@@ -53,7 +53,7 @@ public class TodoController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/status/{id}")
 	public ResponseEntity<Todo> updateStatus(@RequestBody Todo todo, @RequestParam("id") Long id) 
 			throws ResourceNotFoundException {
 		Todo modifiedTodo = TodoService.update(todo, id);
