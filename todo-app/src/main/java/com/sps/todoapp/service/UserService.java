@@ -10,7 +10,7 @@ import com.sps.todoapp.util.Helper;
 @Service
 public class UserService {
 
-	public User doLogin(String username, String password) {
+	public User validateUser(String username, String password) {
 		Map<String, User> userMap = Helper.getUsers();
 		User user = userMap.get(username);
 		

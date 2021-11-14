@@ -34,9 +34,10 @@ public class LoginController {
 	@PostMapping("/login")
 	public String login(ModelMap model, @RequestParam ("username") String username, 
 			@RequestParam("password") String password) {
+		User user = userService.validateUser(username, password);
 		
-		
-		User user = userService.doLogin(username, password);
+		if (null != user)
+			return "todo/todoList";
 		model.put("errorMsg", "Invalid username/password");
 		return "login";
 	}
