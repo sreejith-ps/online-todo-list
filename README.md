@@ -39,6 +39,7 @@ services and then repository which connects to H2 in-memory database to persist 
 	http://localhost:8085
 	
 - As the application is built in spring boot, inbuilt tomcat container is attached hence no need to deply it separately. It is possible to deploy in a seperate tomcat server as well but I haven't tested and verified it.
+war file is attached inside war folder
 
 #Functionalities Implemented
 -----------------------------
