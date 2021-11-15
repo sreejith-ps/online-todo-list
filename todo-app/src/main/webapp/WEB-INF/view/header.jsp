@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>TODO App</title>
+<title>TODO App - List Page</title>
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -24,21 +25,25 @@
 </head>
 <body>
 
-	<div>
+ <%
+      if (session != null) {
+         if (session.getAttribute("userName") == null) {
+            response.sendRedirect("../login");
+         }
+      }
+   %>
+	<div role="navigation">
 		<div class="navbar navbar-inverse">
-			<a href="#" class="navbar-brand">TODO Application</a>
+			<a href="/todo/todoList" class="navbar-brand">TODO Application</a>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/todo/todoList">Todos</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+				
+			</div> 
+			<div> <font color="white">${userName}</font></div>
 		</div>
 	</div>
-
-	<p>
-        <font color="red">${errorMsg}</font>
-    </p>
-    <form action="/login" method="POST">
-		<input type="text" name="username" placeholder="User name" /> <br>
-		<br> <input type="password" name="password"
-			placeholder="Password" /> <br>
-		<br>
-		<button>Login</button>
-	</form>
 </body>
 </html>

@@ -1,63 +1,101 @@
 package com.sps.todoapp.controller;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sps.todoapp.exception.ResourceNotFoundException;
 import com.sps.todoapp.model.Todo;
+import com.sps.todoapp.model.User;
 import com.sps.todoapp.service.TodoService;
 
 @Controller
+@RequestMapping("/todo")
 public class TodoController {
-	
+
 	@Autowired
 	TodoService service;
-	
-	@GetMapping("/{id}")
-	public Todo getTodoDetails(@RequestParam("id") Long id) throws ResourceNotFoundException {
-		Todo Todo = service.getTodoDetailsById(id);
-		return Todo;
+
+	@GetMapping("/todoList")
+	public String getAllTodos(ModelMap model, HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		if (null == session || null == session.getAttribute("user")) {
+			return "login";
+		}
+		User user = (User) session.getAttribute("user");
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
+		return "todo/todoList";
 	}
 
-	@GetMapping
-	public List<Todo> getTodos() {
-		return TodoService.getAllTodos();
+	@PostMapping("/todoAdd")
+	public String createTodo(@ModelAttribute Todo todo, BindingResult result, HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		if (null == session || null == session.getAttribute("user")) {
+			return "login";
+		}
+		User user = (User) session.getAttribute("user");
+		todo.setUserId(user.getId());
+		service.create(todo);
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
+		req.setAttribute("successMsg", "Task added successfully");
+		return "todo/todoList";
 	}
 
-	@PostMapping
-	public Todo createTodo(@RequestBody Todo Todo) {
-		return TodoService.create(Todo);
+	@GetMapping("/todoAdd")
+	public String addTodo(HttpServletRequest req) {
+		Todo todo = (Todo) req.getAttribute("todo");
+		if (null != todo)
+			req.setAttribute("todo", service.getTodoDetailsById(todo.getId()));
+		return "todo/todoAdd";
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo, @RequestParam("id") Long id) 
-			throws ResourceNotFoundException {
-		Todo modifiedTodo = TodoService.update(todo, id);
-		return ResponseEntity.ok(modifiedTodo);
+	@PostMapping("/todoUpdate")
+	public String updateTodo(@ModelAttribute Todo todo, BindingResult result, HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		if (null == session || null == session.getAttribute("user")) {
+			return "login";
+		}
+		User user = (User) session.getAttribute("user");
+		service.update(todo, null);
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
+		req.setAttribute("successMsg", "Task updated successfully");
+		return "todo/todoList";
 	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> deleteTodo(@RequestParam("id") Long id) 
-			throws ResourceNotFoundException {
-		TodoService.delete(id);
-		return ResponseEntity.noContent().build();
+
+	@GetMapping("/todoEdit")
+	public String editTodo(@RequestParam("id") Long id, HttpServletRequest req, @ModelAttribute Todo todo) {
+		Todo dbTodo = service.getTodoDetailsById(id);
+		todo.setId(dbTodo.getId());
+		todo.setName(dbTodo.getName());
+		todo.setDescription(dbTodo.getDescription());
+		todo.setStatus(dbTodo.getStatus());
+		todo.setTargetDate(dbTodo.getTargetDate());
+		todo.setUserId(dbTodo.getUserId());
+		req.setAttribute("todo", dbTodo);
+		return "todo/todoAdd";
+
 	}
-	
-	@PutMapping("/status/{id}")
-	public ResponseEntity<Todo> updateStatus(@RequestBody Todo todo, @RequestParam("id") Long id) 
-			throws ResourceNotFoundException {
-		Todo modifiedTodo = TodoService.update(todo, id);
-		return ResponseEntity.ok(modifiedTodo);
+
+	@GetMapping("/todoDelete")
+	public String deleteTodo(@RequestParam("id") Long id, HttpServletRequest req) throws ResourceNotFoundException {
+		HttpSession session = req.getSession(false);
+		if (null == session || null == session.getAttribute("user")) {
+			return "login";
+		}
+		User user = (User) session.getAttribute("user");
+		service.delete(id);
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
+		req.setAttribute("successMsg", "Task deleted successfully");
+		return "todo/todoList";
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.sps.todoapp.controller;
+package com.sps.todoapp.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -12,19 +12,17 @@ import com.sps.todoapp.service.UserService;
 
 
 @SpringBootTest
-public class LoginControllerTests {
+public class UserServiceTests {
 	
 	@Autowired
 	UserService userService;
 	
-	
-
 	@Test
-	public void getAllBooksTest() {
+	public void loginTest() {
 		String userName = "admin";
 		String password = "password";
-		when(userService.doLogin(userName, password)).thenReturn(
+		when(userService.validateUser(userName, password)).thenReturn(
 				new User(1, "Admin", "Global", "admin", "admin"));
-		assertEquals(1,  userService.doLogin(userName, password).getId());
+		assertEquals(1,  userService.validateUser(userName, password).getId());
 	}
 }
