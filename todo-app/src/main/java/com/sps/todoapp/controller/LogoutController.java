@@ -22,7 +22,7 @@ public class LogoutController {
 	      session.removeAttribute("user");
 	      session.getMaxInactiveInterval();
 	      
-		return "login";
+		return "redirect:/login";
 	}
 
 }

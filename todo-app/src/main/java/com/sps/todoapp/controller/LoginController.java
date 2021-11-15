@@ -27,13 +27,18 @@ public class LoginController {
 	@Autowired
 	TodoService service;
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req) {
 		return "login";
 	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(HttpServletRequest req) {
+		return "login";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model, @RequestParam("username") String username,
+	public String doLogin(ModelMap model, @RequestParam("username") String username,
 			@RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response) {
 		User user = userService.validateUser(username, password);
 
@@ -45,7 +50,7 @@ public class LoginController {
 			session.setAttribute("user", user);
 			session.setAttribute("userName", user.getFirstName() + " " + user.getLastName());
 			session.setMaxInactiveInterval(60); 
-
+			request.setAttribute("todos", service.getAllTodos(user.getId()));
 			return "todo/todoList";
 		}
 		model.put("errorMsg", "Invalid username/password");

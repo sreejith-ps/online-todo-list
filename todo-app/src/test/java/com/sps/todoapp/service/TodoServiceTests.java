@@ -25,7 +25,6 @@ public class TodoServiceTests {
 
 	@Autowired
 	TodoService service;
-	
 
 	@Test
 	public void createTodo() {
@@ -45,7 +44,7 @@ public class TodoServiceTests {
 	@Test
 	public void getAllTodos() {
 		LocalDate d = LocalDate.of(2021, 11, 15);
-		when(service.getAllTodos()).thenReturn(Stream.of(new Todo(1L, "Start Assignment", "Start Assignment", "pending", 
+		when(service.getAllTodos(1)).thenReturn(Stream.of(new Todo(1L, "Start Assignment", "Start Assignment", "pending", 
 				Date.from(d.atStartOfDay()
 					      .atZone(ZoneId.systemDefault())
 					      .toInstant()) , new Date(), 1),
@@ -53,7 +52,7 @@ public class TodoServiceTests {
 						Date.from(d.atStartOfDay()
 							      .atZone(ZoneId.systemDefault())
 							      .toInstant()) , new Date(), 1)).collect(Collectors.toList()));
-		assertEquals(2, service.getAllTodos());
+		assertEquals(2, service.getAllTodos(1));
 	}
 	
 	@Test

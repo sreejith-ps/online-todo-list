@@ -22,8 +22,8 @@ public class TodoService {
 		return repository.findById(id).get(); //orElseThrow(() -> new ResourceNotFoundException("Item doesn't exist"));
 	}
 
-	public List<Todo> getAllTodos() {
-		return repository.findAll();
+	public List<Todo> getAllTodos(Integer id) {
+		return repository.findByUserId(id);
 	}
 
 	public Todo create(Todo todo) {
