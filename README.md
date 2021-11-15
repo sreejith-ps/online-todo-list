@@ -48,6 +48,7 @@ services and then repository which connects to H2 in-memory database to persist 
 - all the changes are persisted to the 
 - each tasks displays the date of last update and description
 - basic error handling
+- unit test partially implemented (not all the cases)
 
 
 #Functionalities Pending
