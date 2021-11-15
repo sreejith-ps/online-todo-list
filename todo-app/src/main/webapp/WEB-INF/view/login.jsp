@@ -26,7 +26,7 @@
 
 	<div>
 		<div class="navbar navbar-inverse">
-			<a href="/" class="navbar-brand">TODO Application</a>
+			<a href="#" class="navbar-brand">TODO Application</a>
 		</div>
 	</div>
 

@@ -24,16 +24,25 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+
+ <%
+      if (session != null) {
+         if (session.getAttribute("userName") == null) {
+            response.sendRedirect("../login");
+         }
+      }
+   %>
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
 			<a href="/todo/todoList" class="navbar-brand">TODO Application</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/todo/todoList">Todos</a></li>
-					<li><a href="/">Logout</a></li>
+					<li><a href="/logout">Logout</a></li>
 				</ul>
 				
-			</div>
+			</div> 
+			<div> <font color="white">${userName}</font></div>
 		</div>
 	</div>
 </body>
