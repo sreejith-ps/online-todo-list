@@ -29,8 +29,10 @@
 			<a href="/todo/todoList" class="navbar-brand">TODO Application</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
+					<li><a href="/todo/todoList">Todos</a></li>
 					<li><a href="/">Logout</a></li>
 				</ul>
+				
 			</div>
 		</div>
 	</div>

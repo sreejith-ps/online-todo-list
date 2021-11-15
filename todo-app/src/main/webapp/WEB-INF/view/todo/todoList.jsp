@@ -16,7 +16,7 @@
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Name</th>
+						<th>Title</th>
 						<th>Description</th>
 						<th>Status</th>
 						<th>Target Date</th>

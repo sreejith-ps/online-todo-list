@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "todo")
 public class Todo {
@@ -28,9 +30,11 @@ public class Todo {
 	private String status;
 	
 	@Column(name = "target_date")
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
 	private Date targetDate;
 	
 	@Column(name = "modified_date")
+	 @DateTimeFormat(pattern="yyyy-MM-dd HH:mm") 
 	private Date modifiedDate;
 	
 	@Column(name = "user_id")

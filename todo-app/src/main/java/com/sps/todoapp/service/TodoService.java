@@ -1,5 +1,6 @@
 package com.sps.todoapp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sps.todoapp.exception.ResourceNotFoundException;
 import com.sps.todoapp.model.Todo;
 import com.sps.todoapp.repository.TodoRepository;
 
@@ -27,10 +27,12 @@ public class TodoService {
 	}
 
 	public Todo create(Todo todo) {
+		todo.setModifiedDate(new Date());
 		return repository.save(todo);
 	}
 
 	public Todo update(Todo todo, Long todoId) {
+		todo.setModifiedDate(new Date());
 		return repository.save(todo);
 	}
 

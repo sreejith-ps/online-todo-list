@@ -22,68 +22,59 @@ import com.sps.todoapp.service.TodoService;
 @Controller
 @RequestMapping("/todo")
 public class TodoController {
-	
+
 	@Autowired
 	TodoService service;
-	
+
 	@GetMapping("/todoList")
 	public String getAllTodos(ModelMap model, HttpServletRequest req) {
-		List<Todo> todos = service.getAllTodos();
-		req.setAttribute("todos", todos);
+		req.setAttribute("todos", service.getAllTodos());
 		return "todo/todoList";
 	}
-	
+
 	@PostMapping("/todoAdd")
 	public String createTodo(@ModelAttribute Todo todo, BindingResult result, HttpServletRequest req) {
-		
-		if (null != todo.getId())
-			service.update(todo, null);
-		else
-			service.create(todo);
-		List<Todo> todos = service.getAllTodos();
-		req.setAttribute("todos", todos);
+		service.create(todo);
+		req.setAttribute("todos", service.getAllTodos());
+		req.setAttribute("successMsg", "Task added successfully");
 		return "todo/todoList";
 	}
-	
 
 	@GetMapping("/todoAdd")
 	public String addTodo(HttpServletRequest req) {
 		Todo todo = (Todo) req.getAttribute("todo");
 		if (null != todo)
-		req.setAttribute("todo", service.getTodoDetailsById(todo.getId()));
+			req.setAttribute("todo", service.getTodoDetailsById(todo.getId()));
 		return "todo/todoAdd";
 	}
-	
 
-	
 	@PostMapping("/todoUpdate")
 	public String updateTodo(@ModelAttribute Todo todo, BindingResult result, HttpServletRequest req) {
-		
 		service.update(todo, null);
-		List<Todo> todos = service.getAllTodos();
-		req.setAttribute("todos", todos);
+		req.setAttribute("todos", service.getAllTodos());
+		req.setAttribute("successMsg", "Task updated successfully");
 		return "todo/todoList";
 	}
 
 	@GetMapping("/todoEdit")
-	public String editTodo1(@RequestParam("id") Long id, HttpServletRequest req, @ModelAttribute Todo todo) {
+	public String editTodo(@RequestParam("id") Long id, HttpServletRequest req, @ModelAttribute Todo todo) {
 		Todo dbTodo = service.getTodoDetailsById(id);
 		todo.setId(dbTodo.getId());
 		todo.setName(dbTodo.getName());
+		todo.setDescription(dbTodo.getDescription());
+		todo.setStatus(dbTodo.getStatus());
+		todo.setTargetDate(dbTodo.getTargetDate());
 		req.setAttribute("todo", dbTodo);
 		return "todo/todoAdd";
-//		return "redirect:/todo/todoAdd";
-		
+
 	}
-	
+
 	@GetMapping("/todoDelete")
-	public String deleteTodo(@RequestParam("id") Long id, HttpServletRequest req) 
-			throws ResourceNotFoundException {
+	public String deleteTodo(@RequestParam("id") Long id, HttpServletRequest req) throws ResourceNotFoundException {
 		service.delete(id);
-		req.setAttribute("todoitems", service.getAllTodos());
+		req.setAttribute("todos", service.getAllTodos());
 		req.setAttribute("successMsg", "Task deleted successfully");
 		return "todo/todoList";
 	}
-	
 
 }

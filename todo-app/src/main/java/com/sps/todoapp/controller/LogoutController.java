@@ -18,31 +18,12 @@ import com.sps.todoapp.service.UserService;
 
 @Controller
 @RequestMapping
-@SessionAttributes("name")
-public class LoginController {
-	
-	@Autowired
-	UserService userService;
+public class LogoutController {
 
-	@Autowired
-	TodoService service;
-	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String home(HttpServletRequest req) {
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest req) {
+		req.setAttribute("mode", "LOGIN");
 		return "login";
 	}
-	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login(ModelMap model, @RequestParam ("username") String username, 
-			@RequestParam("password") String password) {
-		User user = userService.validateUser(username, password);
-		
-		if (null != user) {
-			model.put("username", username);
-	        model.put("password", password);
-			return "todo/todoList";
-		}
-		model.put("errorMsg", "Invalid username/password");
-		return "login";
-	}
+
 }
