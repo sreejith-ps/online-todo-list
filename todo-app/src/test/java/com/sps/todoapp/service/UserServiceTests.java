@@ -17,7 +17,8 @@ public class UserServiceTests {
 	@Autowired
 	UserService userService;
 	
-	@Test
+	
+//	@Test
 	public void loginTest() {
 		String userName = "admin";
 		String password = "password";

@@ -65,6 +65,7 @@ services and then repository which connects to H2 in-memory database to persist 
   - Security implementation
   - Exception Handling
   - Logging
+  - UI styling
   - search based on various parameters
   - display the record count
   - pagination 
