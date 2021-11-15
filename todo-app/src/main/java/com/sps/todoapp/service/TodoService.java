@@ -19,7 +19,7 @@ public class TodoService {
 	TodoRepository repository;
 
 	public Todo getTodoDetailsById(Long id) {
-		return repository.findById(id).get(); //orElseThrow(() -> new ResourceNotFoundException("Item doesn't exist"));
+		return repository.findById(id).get(); 
 	}
 
 	public List<Todo> getAllTodos(Integer id) {
