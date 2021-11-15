@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sps.todoapp.exception.ResourceNotFoundException;
 import com.sps.todoapp.model.Todo;
 import com.sps.todoapp.repository.TodoRepository;
 
@@ -18,13 +19,11 @@ public class TodoService {
 	TodoRepository repository;
 
 	public Todo getTodoDetailsById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).get(); //orElseThrow(() -> new ResourceNotFoundException("Item doesn't exist"));
 	}
 
 	public List<Todo> getAllTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	public Todo create(Todo todo) {
@@ -32,13 +31,11 @@ public class TodoService {
 	}
 
 	public Todo update(Todo todo, Long todoId) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.save(todo);
 	}
 
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		repository.deleteById(id);
 	}
 	
 	

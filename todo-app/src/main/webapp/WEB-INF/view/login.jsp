@@ -30,8 +30,10 @@
 		</div>
 	</div>
 
-	<h2>${errorMsg}</h2>
-	<form method="post">
+	<p>
+        <font color="red">${errorMsg}</font>
+    </p>
+    <form action="/login" method="POST">
 		<input type="text" name="username" placeholder="User name" /> <br>
 		<br> <input type="password" name="password"
 			placeholder="Password" /> <br>

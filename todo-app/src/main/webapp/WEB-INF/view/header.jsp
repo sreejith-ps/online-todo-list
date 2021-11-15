@@ -26,11 +26,9 @@
 <body>
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
-			<a href="/" class="navbar-brand">TODO Application</a>
+			<a href="/todo/todoList" class="navbar-brand">TODO Application</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/todoList">Todos</a></li>
-					<li><a href="/todoAdd">add</a></li>
 					<li><a href="/">Logout</a></li>
 				</ul>
 			</div>
