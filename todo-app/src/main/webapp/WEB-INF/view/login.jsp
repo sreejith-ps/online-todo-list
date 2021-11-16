@@ -30,15 +30,26 @@
 		</div>
 	</div>
 
-	<p>
-        <font color="red">${errorMsg}</font>
-    </p>
-    <form action="/login" method="POST">
-		<input type="text" name="username" placeholder="User name" /> <br>
-		<br> <input type="password" name="password"
-			placeholder="Password" /> <br>
-		<br>
-		<button>Login</button>
-	</form>
+	<div class="container text-center">
+		<p>
+	        <font color="red">${errorMsg}</font>
+	    </p>
+		<form action="/login" method="POST" class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-md-5">Username</label>
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="username" placeholder="Username" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-md-5">Password</label>
+				<div class="col-md-3">
+					<input type="password" class="form-control" name="password" placeholder="Password" />
+				</div>
+			</div>
+			
+			<button class="btn btn-primary">Login</button>
+		</form>
+	</div>
 </body>
 </html>

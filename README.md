@@ -18,6 +18,7 @@ Tech Stack:
 - Springboot 2.5.6
 - H2 DB
 - Apache Maven 3.6.3
+- bootstrap for stying
 
 
 <hr>
