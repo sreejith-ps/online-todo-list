@@ -49,7 +49,7 @@ public class LoginController {
 			HttpSession session = request.getSession(true); 
 			session.setAttribute("user", user);
 			session.setAttribute("userName", user.getFirstName() + " " + user.getLastName());
-			session.setMaxInactiveInterval(60); 
+			session.setMaxInactiveInterval(300); 
 			request.setAttribute("todos", service.getAllTodos(user.getId()));
 			return "todo/todoList";
 		}

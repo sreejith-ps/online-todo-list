@@ -7,7 +7,7 @@
 
 - Predefined users can (admin/admin, user/user) can login to the system
 - Logged in users can add/edit/modify/delete TODO tasks 
-- Application will be automatically logged out if inactive for 60 seconds
+- Application will be automatically logged out if inactive for 5 minutes
 
 
 Tech Stack:
