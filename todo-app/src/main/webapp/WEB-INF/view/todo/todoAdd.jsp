@@ -33,19 +33,22 @@
 			<div class="form-group">
 				<label class="control-label col-md-5">Status</label>
 				<div class="col-md-3">
-					<select class="form-control" value="${todo.status}"
+					<select class="form-control" value="${todo.status}" 
 						name="status" id="status">
-						<option value="pendig" >Pending</option>
-						<option value="progress">In Progress</option>
-						<option value="done">Done</option>
+						<option value="pending" <c:if test="${todo.status == 'pending'}"> selected</c:if>>Pending</option>
+						<option value="progress" <c:if test="${todo.status == 'progress'}"> selected</c:if>>In Progress</option>
+						<c:if test="${todo.id != null && todo.id > 0}">
+						<option value="done" <c:if test="${todo.status == 'done'}"> selected</c:if>>Done</option>
+						</c:if>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-5">Target Date </label>
 				<div class="col-md-3">
-					<input type="date" value="${todo.targetDate}" class="form-control"
-						name="targetDate" id="targetDate">
+					<input type="date" class="form-control"
+						name="targetDate" id="targetDate"
+						value="${todo.targetDate}" />
 				</div>
 			</div>
 			<div class="form-group">

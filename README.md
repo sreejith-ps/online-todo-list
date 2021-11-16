@@ -57,7 +57,7 @@ war file is attached inside war folder
 #Functionalities Pending
 -----------------------------
 - option for user to check/uncheck items from list 
-- edit fuctionality is not correctly populating status and date field values
+- edit fuctionality is not correctly populating date field value
 - date formatting
 - form validations
 - security implementation such as password encryption and so on

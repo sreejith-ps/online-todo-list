@@ -7,6 +7,6 @@
 <title>TODO App</title>
 </head>
 <body>
-	Invalid attempt to access the page
+	Some error occured. Please try again
 </body>
 </html>
