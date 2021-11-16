@@ -38,7 +38,7 @@ services and then repository which connects to H2 in-memory database to persist 
 	
 	http://localhost:8085
 	
-- As the application is built in spring boot, inbuilt tomcat container is attached hence no need to deply it separately. It is possible to deploy in a seperate tomcat server as well but I haven't tested and verified it.
+- As the application is built in spring boot, inbuilt tomcat container is attached hence no need to deploy it separately. It is possible to deploy in a seperate tomcat server as well but I haven't tested and verified it.
 war file is attached inside war folder
 
 #Functionalities Implemented
@@ -46,7 +46,7 @@ war file is attached inside war folder
 - login & logout
 - user can create tasks
 - user can modify, list and delete her/his own tasks
-- all the changes are persisted to the 
+- all the changes are persisted to the H2 database
 - each tasks displays the date of last update and description
 - basic error handling
 - unit test partially implemented (not all the cases)
@@ -59,6 +59,7 @@ war file is attached inside war folder
 - date formatting
 - form validations
 - security implementation such as password encryption and so on
+- unit test completion
 
  
 # ROADMAP
