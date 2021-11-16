@@ -42,19 +42,27 @@ public class TodoController {
 		if (null == session || null == session.getAttribute("user")) {
 			return "login";
 		}
+
 		User user = (User) session.getAttribute("user");
-		todo.setUserId(user.getId());
-		service.create(todo);
+		String shouldSave = (String) session.getAttribute("save");
+		if (null != shouldSave && "true".equals(shouldSave)) {
+			todo.setUserId(user.getId());
+			service.create(todo);
+			req.setAttribute("successMsg", "Task added successfully");
+			session.setAttribute("save", "false");
+		}
 		req.setAttribute("todos", service.getAllTodos(user.getId()));
-		req.setAttribute("successMsg", "Task added successfully");
 		return "todo/todoList";
 	}
 
 	@GetMapping("/todoAdd")
 	public String addTodo(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
 		Todo todo = (Todo) req.getAttribute("todo");
 		if (null != todo)
 			req.setAttribute("todo", service.getTodoDetailsById(todo.getId()));
+
+		session.setAttribute("save", "true");
 		return "todo/todoAdd";
 	}
 
@@ -64,10 +72,14 @@ public class TodoController {
 		if (null == session || null == session.getAttribute("user")) {
 			return "login";
 		}
+
 		User user = (User) session.getAttribute("user");
+		todo.setUserId(user.getId());
 		service.update(todo, null);
-		req.setAttribute("todos", service.getAllTodos(user.getId()));
 		req.setAttribute("successMsg", "Task updated successfully");
+
+		req.setAttribute("todo", new Todo());
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
 		return "todo/todoList";
 	}
 
@@ -80,7 +92,7 @@ public class TodoController {
 		todo.setStatus(dbTodo.getStatus());
 		todo.setTargetDate(dbTodo.getTargetDate());
 		todo.setUserId(dbTodo.getUserId());
-		req.setAttribute("todo", dbTodo);
+		req.setAttribute("todo", todo);
 		return "todo/todoAdd";
 
 	}

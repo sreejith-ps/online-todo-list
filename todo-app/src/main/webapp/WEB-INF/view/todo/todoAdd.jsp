@@ -20,14 +20,14 @@
 				<label class="control-label col-md-5">Title</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control" name="name"
-						value="${todo.name }" />
+						value="${todo.name }" required="true"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-md-5">Description</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control" name="description"
-						value="${todo.description }" />
+						value="${todo.description }" required="required"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -45,7 +45,7 @@
 				<label class="control-label col-md-5">Target Date </label>
 				<div class="col-md-3">
 					<input type="date" value="${todo.targetDate}" class="form-control"
-						name="targetDate">
+						name="targetDate" id="targetDate">
 				</div>
 			</div>
 			<div class="form-group">

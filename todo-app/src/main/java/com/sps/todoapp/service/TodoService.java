@@ -2,6 +2,7 @@ package com.sps.todoapp.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -37,7 +38,10 @@ public class TodoService {
 	}
 
 	public void delete(Long id) {
-		repository.deleteById(id);
+		Optional<Todo> todo = repository.findById(id); 
+		
+		if (todo.isPresent())
+			repository.delete(todo.get());
 	}
 	
 	

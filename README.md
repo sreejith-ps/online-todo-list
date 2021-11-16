@@ -51,6 +51,7 @@ war file is attached inside war folder
 - each tasks displays the date of last update and description
 - basic error handling
 - unit test partially implemented (not all the cases)
+- validation to avoid saving duplicate record on click of refresh after save
 
 
 #Functionalities Pending
