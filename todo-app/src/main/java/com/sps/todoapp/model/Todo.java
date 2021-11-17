@@ -36,9 +36,14 @@ public class Todo {
 	@Column(name = "modified_date")
 	 @DateTimeFormat(pattern="yyyy-MM-dd HH:mm") 
 	private Date modifiedDate;
+
+	@Column(name = "activeStatus")
+	private Integer activeStatus=1;
 	
 	@Column(name = "user_id")
 	private Integer userId;
+	
+	
 	
 	public Todo() {}
 
@@ -110,6 +115,16 @@ public class Todo {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+
+	public Integer getActiveStatus() {
+		return activeStatus;
+	}
+
+
+	public void setActiveStatus(Integer activeStatus) {
+		this.activeStatus = activeStatus;
 	}
 	
 	

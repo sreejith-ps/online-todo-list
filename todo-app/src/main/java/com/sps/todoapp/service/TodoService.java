@@ -47,6 +47,18 @@ public class TodoService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+
+	public Todo changeCheckStatus(Long id, Integer checkStatus) {
+		Optional<Todo> todoOp = repository.findById(id); 
+		
+		if (todoOp.isPresent()) {
+			Todo todo = todoOp.get();
+			todo.setActiveStatus(checkStatus == 1 ? 2 : 1);
+			todo = repository.save(todo);
+			return todo;
+		}
+		return null;
+	}
 	
 	
 }

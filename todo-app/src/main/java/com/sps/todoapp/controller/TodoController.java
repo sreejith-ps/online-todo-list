@@ -104,10 +104,23 @@ public class TodoController {
 			return "login";
 		}
 		User user = (User) session.getAttribute("user");
-		service.delete(id);
+		service.deleteById(id);
 		req.setAttribute("todos", service.getAllTodos(user.getId()));
 		req.setAttribute("successMsg", "Task deleted successfully");
 		return "todo/todoList";
+	}
+	
+	@GetMapping("/check")
+	public String checkTodo(@RequestParam("id") Long id, @RequestParam("checkStatus") Integer checkStatus, HttpServletRequest req, @ModelAttribute Todo todo) {
+		HttpSession session = req.getSession(false);
+		if (null == session || null == session.getAttribute("user")) {
+			return "login";
+		}
+		User user = (User) session.getAttribute("user");
+		service.changeCheckStatus(id, checkStatus);
+		req.setAttribute("todos", service.getAllTodos(user.getId()));
+		return "todo/todoList";
+
 	}
 
 }
