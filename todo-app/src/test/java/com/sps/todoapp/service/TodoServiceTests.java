@@ -97,7 +97,7 @@ public class TodoServiceTests {
 	}
 	
 	
-//	@Test
+	@Test
 	public void delete() throws ResourceNotFoundException {
 		LocalDate d = LocalDate.of(2021, 11, 15);
 		Long id = 1L;
@@ -105,16 +105,7 @@ public class TodoServiceTests {
 				Date.from(d.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant()) , new Date(), 1);
-		
-
-		Todo expectedTodo = new Todo(1L, "Complete Assignment", "Complete Assignment", "pending", 
-				Date.from(d.atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant()) , new Date(), 1);
-
-		when(repository.findById(id)).thenReturn(Optional.of(expectedTodo));
-		assertNotNull(service.getTodoDetailsById(id));
-//		repository.deleteById(1L);
-		verify(repository, times(1)).delete(expectedTodo);
+		service.deleteById(todo.getId());
+		verify(repository, times(1)).deleteById(todo.getId());
 	}
 }

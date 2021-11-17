@@ -41,7 +41,11 @@ public class TodoService {
 		Optional<Todo> todo = repository.findById(id); 
 		
 		if (todo.isPresent())
-			repository.delete(todo.get());
+			repository.deleteById(todo.get().getId());
+	}
+
+	public void deleteById(Long id) {
+		repository.deleteById(id);
 	}
 	
 	
