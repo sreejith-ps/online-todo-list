@@ -45,10 +45,32 @@ public class TodoServiceTests {
 						Date.from(d.atStartOfDay()
 							      .atZone(ZoneId.systemDefault())
 							      .toInstant()) , new Date(), 1));
+		System.out.println(service.create(todo).getId());
 		assertThat(service.create(todo).getId()).isNotNull();
+		assertEquals(1L, service.create(todo).getId());
 	}
 	
-//	@Test
+
+	@Test
+	public void updateTodo() {
+		LocalDate d = LocalDate.of(2021, 11, 15);
+		Long id = 1L;
+		Todo todo = new Todo(id, "Complete Assignment", "Complete Assignment", "pending", 
+				Date.from(d.atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant()) , new Date(), 1);
+		when(repository.save(todo)).thenReturn(
+				new Todo(1L, "Complete Assignment", "Complete Assignment", "done", 
+						Date.from(d.atStartOfDay()
+							      .atZone(ZoneId.systemDefault())
+							      .toInstant()) , new Date(), 1));
+		System.out.println(service.create(todo).getId());
+		assertThat(service.update(todo, id).getId()).isNotNull();
+		assertEquals(1L, service.update(todo, 1L).getId());
+		assertEquals("done", service.update(todo, id).getStatus());
+	}
+	
+	@Test
 	public void getAllTodos() {
 		LocalDate d = LocalDate.of(2021, 11, 15);
 		when(repository.findByUserId(1)).thenReturn(Stream.of(new Todo(1L, "Start Assignment", "Start Assignment", "pending", 
@@ -59,7 +81,7 @@ public class TodoServiceTests {
 						Date.from(d.atStartOfDay()
 							      .atZone(ZoneId.systemDefault())
 							      .toInstant()) , new Date(), 1)).collect(Collectors.toList()));
-		assertEquals(2, service.getAllTodos(1));
+		assertEquals(2, service.getAllTodos(1).size());
 	}
 	
 	@Test
@@ -71,17 +93,28 @@ public class TodoServiceTests {
 					      .atZone(ZoneId.systemDefault())
 					      .toInstant()) , new Date(), 1)));
 		assertNotNull(service.getTodoDetailsById(id));
+		assertEquals(id, service.getTodoDetailsById(id).getId());
 	}
 	
 	
 //	@Test
 	public void delete() throws ResourceNotFoundException {
 		LocalDate d = LocalDate.of(2021, 11, 15);
-		Todo todo = new Todo(1L, "Complete Assignment", "Complete Assignment", "pending", 
+		Long id = 1L;
+		Todo todo = new Todo(id, "Complete Assignment", "Complete Assignment", "pending", 
 				Date.from(d.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant()) , new Date(), 1);
-		repository.deleteById(1L);
-		verify(service, times(1)).delete(todo.getId());
+		
+
+		Todo expectedTodo = new Todo(1L, "Complete Assignment", "Complete Assignment", "pending", 
+				Date.from(d.atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant()) , new Date(), 1);
+
+		when(repository.findById(id)).thenReturn(Optional.of(expectedTodo));
+		assertNotNull(service.getTodoDetailsById(id));
+//		repository.deleteById(1L);
+		verify(repository, times(1)).delete(expectedTodo);
 	}
 }
