@@ -57,11 +57,12 @@ war file is attached inside war folder
 
 #Functionalities Pending
 -----------------------------
+- option for user to check/uncheck items from list 
 - edit fuctionality is not correctly populating date field value
 - date formatting
 - form validations
 - security implementation such as password encryption and so on
-
+- unit test completion
 
  
 # ROADMAP
@@ -70,6 +71,8 @@ war file is attached inside war folder
   - Exception Handling
   - Logging
   - UI styling
+  - categorisation, prioritization
+  - Add option to specify when to repeat, 
   - search based on various parameters
   - display the record count
   - pagination 
