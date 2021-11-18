@@ -47,6 +47,7 @@ war file is attached inside war folder
 - login & logout
 - user can create tasks
 - user can modify, list and delete her/his own tasks
+- option for user to check/uncheck items from list 
 - all the changes are persisted to the H2 database
 - each tasks displays the date of last update and description
 - basic error handling
@@ -70,6 +71,8 @@ war file is attached inside war folder
   - Exception Handling
   - Logging
   - UI styling
+  - categorisation, prioritization
+  - Add option to specify when to repeat, 
   - search based on various parameters
   - display the record count
   - pagination 
